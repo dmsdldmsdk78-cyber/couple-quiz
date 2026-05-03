@@ -1,0 +1,478 @@
+@font-face {
+    font-family: 'NeoDonggeunmo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'NeoDonggeunmo';
+}
+
+body {
+  margin: 0;
+  background: #cfcfcf;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #2f211e;
+  touch-action: manipulation;
+  /* 두번클릭해도 확대안되게 */
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px 0;
+  background: #ffffff;
+}
+
+.screen {
+  position: relative;
+  width: min(100vw - 32px, 390px);
+  height: min(calc(100vh - 56px), 844px);
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.intro-screen {
+  background-image: url('/quizimg/quiz_intro.png');
+}
+
+.quiz-screen {
+  padding: 24px 26px;
+  background-image: url('/quizimg/mainbg.png');
+}
+
+.pink-screen {
+  padding: 24px 26px;
+  background-image: url('/quizimg/pinkbg.png');
+}
+
+.intro-hit-btn {
+  position: absolute;
+  z-index: 5;
+  border: 0;
+  background: transparent;
+  /* 디버깅용 좌표 맞추기 border: 2px solid red; */
+  cursor: pointer;
+}
+
+/* 왼쪽 퀴즈풀기 버튼 클릭 영역 */
+.intro-start-hit {
+  left: 38px;
+  top: 575px;
+  width: 125px;
+  height: 58px;
+}
+
+/* 오른쪽 문제 만들기 버튼 클릭 영역 */
+.intro-setting-hit {
+  left: 235px;
+  top: 575px;
+  width: 130px;
+  height: 58px;
+}
+
+.image-back-btn {
+  position: absolute;
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.main-back-btn {
+  top: 42px;
+  left: 34px;
+  background-image: url('/quizimg/main_back.png');
+}
+
+.quiz-back-btn {
+  /* outline: 3px solid red; */
+  top: 42px;
+  left: 34px;
+  background-image: url('/quizimg/quiz_back.png');
+}
+
+.page-title {
+  width: 130px;
+  height: 32px;
+  margin: 10px auto 68px;
+
+  background-image: url('/quizimg/mainname.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.question-card {
+  width: 282px;
+  min-height: 142px;
+  margin: 0 auto 24px;
+  padding: 28px 22px;
+  border: 3px solid #76c0c2;
+  border-radius: 55px;
+  background: #f7dce5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-number {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.question-text {
+  margin: 0;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 900;
+}
+
+.score-row {
+  width: 282px;
+  margin: 0 auto 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.score-row span {
+  flex: 1;
+  padding: 8px 10px;
+  border: 2px solid #79c2c1;
+  border-radius: 999px;
+  background: rgba(255, 245, 249, 0.92);
+  text-align: center;
+}
+
+.answer-list {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+
+.answer-btn {
+  width: 282px;
+  min-height: 50px;
+  padding: 0 26px;
+  border: 3px solid #79c2c1;
+  border-radius: 999px;
+  background: #f7dce5;
+  color: #2f211e;
+  font-weight: 900;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: 0.16s ease;
+}
+
+.answer-btn span:first-child {
+  min-width: 34px;
+  text-align: left;
+}
+
+.answer-btn span:last-child {
+  flex: 1;
+  text-align: center;
+}
+
+.answer-btn.is-selected {
+  transform: translateY(1px) scale(1.025);
+  filter: saturate(1.2);
+  border-color: #ef7fa4;
+  background: #f4a2b9;
+  color: white;
+}
+
+.answer-2 {
+  background: #dff8ee;
+}
+
+.answer-3 {
+  background: #dceeff;
+}
+
+.answer-4 {
+  background: #fff4bd;
+}
+
+.next-btn {
+  display: block;
+  width: 136px;
+  min-height: 42px;
+  margin: 36px auto 18px;
+  border: 3px solid #ffaaa9;
+  border-radius: 999px;
+  background: #ffe3e3;
+  color: #ee6f80;
+  font-weight: 900;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.text-btn {
+  display: block;
+  margin: 0 auto;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.setting-screen .page-title,
+.result-screen .page-title {
+  margin-bottom: 74px;
+}
+
+.setting-card,
+.result-card {
+  width: 300px;
+  margin: 0 auto;
+  padding: 28px 22px;
+  border: 2px solid #2f211e;
+  border-radius: 24px;
+  background: #fff9a9;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.09);
+  font-family: 'NeoDonggeunmo';
+}
+
+.setting-label {
+  margin: 0 0 10px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.setting-input {
+  width: 100%;
+  min-height: 38px;
+  margin-bottom: 14px;
+  padding: 0 12px;
+  border: 0;
+  border-bottom: 1px solid rgba(47, 33, 30, 0.35);
+  background: rgba(255, 255, 255, 0.35);
+  text-align: center;
+  font-weight: 800;
+}
+
+.question-input {
+  margin-bottom: 18px;
+}
+
+.setting-field {
+  display: block;
+  font-weight: 900;
+}
+
+.setting-field span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.answer-choice-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.choice-btn {
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.choice-btn.is-active {
+  border-color: #ff8faa;
+  background: #ffe0eb;
+  color: #e6537a;
+}
+
+.saved-count {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.setting-actions {
+  margin: 48px auto 18px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.start-btn {
+  display: block;
+  width: 200px;
+  min-height: 54px;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: 3px solid #ff8faa;
+  border-radius: 999px;
+  background: #ff8faa;
+  color: white;
+  font-size: 18px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  font-family: 'NeoDonggeunmo';
+}
+
+.result-card {
+  min-height: 270px;
+  text-align: center;
+}
+
+.result-title {
+  margin: 0;
+  font-weight: 900;
+}
+
+.divider {
+  width: 110px;
+  height: 1px;
+  margin: 14px auto 30px;
+  background: rgba(47, 33, 30, 0.2);
+}
+
+.result-small {
+  margin: 0 0 18px;
+  font-weight: 800;
+}
+
+.result-score {
+  margin: 0 0 28px;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.result-message {
+  margin: 0 0 8px;
+  font-weight: 900;
+}
+
+.result-desc,
+.result-count {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.result-count {
+  margin-top: 18px;
+}
+
+.result-actions {
+  margin: 56px auto 0;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+.setting-image-btn {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.add-btn {
+  width: 100px;
+  height: 42px;
+  background-image: url('/quizimg/add.png');
+}
+
+.save-btn {
+  width: 100px;
+  height: 42px;
+  background-image: url('/quizimg/save.png');
+}
+
+.popup-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.popup {
+  width: min(320px, 100%);
+  padding: 28px 22px;
+  border: 3px solid #79c2c1;
+  border-radius: 24px;
+  background: #fff9b5;
+  text-align: center;
+  font-weight: 900;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
+}
+
+.popup p {
+  margin: 0 0 18px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.popup button {
+  min-width: 90px;
+  min-height: 36px;
+  border: 2px solid #ff8faa;
+  border-radius: 999px;
+  background: #ffe0eb;
+  font-weight: 900;
+}
+
+@media (max-width: 360px) {
+
+  .quiz-screen,
+  .pink-screen {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .question-card,
+  .answer-btn,
+  .score-row {
+    width: 260px;
+  }
+
+  .intro-actions {
+    gap: 18px;
+  }
+
+  .intro-btn {
+    min-width: 102px;
+  }
+}

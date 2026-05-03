@@ -1,0 +1,15 @@
+여기에 png 파일들을 넣어주세요.
+
+필수 파일명:
+- quiz_intro.png
+- mainbg.png
+- pinkbg.png
+- main_back.png
+- quiz_back.png
+
+경로 예시:
+public/quizimg/quiz_intro.png
+public/quizimg/mainbg.png
+public/quizimg/pinkbg.png
+public/quizimg/main_back.png
+public/quizimg/quiz_back.png
