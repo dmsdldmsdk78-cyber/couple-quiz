@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'NeoDonggeunmo';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
-    font-weight: normal;
-    font-display: swap;
+  font-family: 'NeoDonggeunmo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
 }
 
 * {
@@ -30,24 +30,23 @@ button {
 }
 
 .app {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ffffff;
-  overflow: hidden;
+  padding: 16px;
+  background: #fff;
 }
 
 .screen {
   position: relative;
-
-  width: min(100vw, calc(100vh * 390 / 844));
-  height: min(100vh, calc(100vw * 844 / 390));
-
+  width: min(100%, 390px);
+  aspect-ratio: 390 / 844;
   overflow: hidden;
+
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%;
 }
 
 .intro-screen {
@@ -64,29 +63,30 @@ button {
   background-image: url('/quizimg/pinkbg.png');
 }
 
+/* 버튼 기본세팅 */
 .intro-hit-btn {
   position: absolute;
   z-index: 5;
   border: 0;
   background: transparent;
-  /* 디버깅용 좌표 맞추기 border: 2px solid red; */
+  /* border: 2px solid red; */
   cursor: pointer;
 }
 
 /* 왼쪽 퀴즈풀기 버튼 클릭 영역 */
 .intro-start-hit {
-  left: 38px;
-  top: 575px;
-  width: 125px;
-  height: 58px;
+  left: 9.7%;
+  top: 68.1%;
+  width: 32.1%;
+  height: 6.9%;
 }
 
 /* 오른쪽 문제 만들기 버튼 클릭 영역 */
 .intro-setting-hit {
-  left: 235px;
-  top: 575px;
-  width: 130px;
-  height: 58px;
+  left: 60.3%;
+  top: 68.1%;
+  width: 33.3%;
+  height: 6.9%;
 }
 
 .image-back-btn {
@@ -239,7 +239,8 @@ button {
 
 .setting-screen .page-title,
 .result-screen .page-title {
-  margin-bottom: 74px;
+   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .setting-card,
@@ -262,6 +263,8 @@ button {
 
 .setting-input {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   min-height: 38px;
   margin-bottom: 14px;
   padding: 0 12px;
