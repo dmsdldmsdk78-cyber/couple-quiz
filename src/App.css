@@ -33,18 +33,21 @@ button {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 28px 0;
+  align-items: center;
   background: #ffffff;
+  overflow: hidden;
 }
 
 .screen {
   position: relative;
-  width: min(100vw - 32px, 390px);
-  height: min(calc(100vh - 56px), 844px);
+
+  width: min(100vw, calc(100vh * 390 / 844));
+  height: min(100vh, calc(100vw * 844 / 390));
+
   overflow: hidden;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 100% 100%;
 }
 
 .intro-screen {
