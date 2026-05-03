@@ -359,6 +359,7 @@ button {
   margin: 0 0 28px;
   font-size: 34px;
   font-weight: 900;
+  color: #7a77c8;
 }
 
 .result-message {
@@ -376,6 +377,7 @@ button {
 
 .result-count {
   margin-top: 18px;
+  color: #7a77c8;
 }
 
 .result-actions {
@@ -383,6 +385,35 @@ button {
   display: grid;
   justify-content: center;
   gap: 10px;
+}
+
+.result-image-btn {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.again-btn {
+  width: 96px;
+  height: 42px;
+  background-image: url('/quizimg/again.png');
+}
+
+.backtomain-btn {
+  width: 96px;
+  height: 42px;
+  background-image: url('/quizimg/backtomain.png');
+}
+
+.link-btn {
+  width: 96px;
+  height: 42px;
+  background-image: url('/quizimg/link.png');
 }
 
 .setting-image-btn {

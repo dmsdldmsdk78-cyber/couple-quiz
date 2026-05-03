@@ -262,7 +262,7 @@ function App() {
 
       {page === 'result' && (
         <section className="screen pink-screen result-screen">
-          <h1 className="page-title">커플력 테스트</h1>
+          <h1 className="page-title"></h1>
 
           <div className="result-card">
             <p className="result-title">결과발표</p>
@@ -282,18 +282,34 @@ function App() {
           </div>
 
           <div className="result-actions">
-            <button className="small-yellow-btn" onClick={retryQuiz}>
-              다시풀기
-            </button>
-            <button className="small-yellow-btn" onClick={goIntro}>
-              처음으로
-            </button>
             <button
-              className="small-yellow-btn"
-              onClick={() => setPopupMessage('공유 기능은 다음 버전에 추가해도 좋아요.')}
-            >
-              공유하기
-            </button>
+              className="result-image-btn again-btn"
+              onClick={retryQuiz}
+              aria-label="다시풀기"
+            />
+
+            <button
+              className="result-image-btn backtomain-btn"
+              onClick={goIntro}
+              aria-label="처음으로"
+            />
+
+            <button
+              className="result-image-btn link-btn"
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: '커플력 테스트',
+                    text: `커플력 테스트 결과! 내 점수는 ${score} / ${questions.length}점`,
+                    url: window.location.href,
+                  });
+                } else {
+                  navigator.clipboard.writeText(window.location.href);
+                  setPopupMessage('링크가 복사됐어요.');
+                }
+              }}
+              aria-label="공유하기"
+            />
           </div>
         </section>
       )}
