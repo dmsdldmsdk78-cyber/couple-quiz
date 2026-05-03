@@ -234,17 +234,6 @@ button {
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-.text-btn {
-  display: block;
-  margin: 0 auto;
-  border: 0;
-  background: transparent;
-  color: #111;
-  font-weight: 900;
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
-
 .setting-screen .page-title,
 .result-screen .page-title {
   margin-bottom: 74px;
