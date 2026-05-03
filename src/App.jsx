@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const initialDraft = {
   question: '',
@@ -18,6 +18,30 @@ function App() {
   const [popupMessage, setPopupMessage] = useState('');
 
   const currentQuestion = questions[currentIndex];
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const quizParam = params.get('quiz');
+
+    if (!quizParam) return;
+
+    try {
+      const sharedQuestions = JSON.parse(decodeURIComponent(quizParam));
+
+      if (!Array.isArray(sharedQuestions) || sharedQuestions.length === 0) {
+        setPopupMessage('문제 링크가 올바르지 않아요.');
+        return;
+      }
+
+      setQuestions(sharedQuestions);
+      setCurrentIndex(0);
+      setSelectedIndex(null);
+      setScore(0);
+      setPage('quiz');
+    } catch (error) {
+      setPopupMessage('문제 링크를 불러오지 못했어요.');
+    }
+  }, []);
 
   function goIntro() {
     setPage('intro');
@@ -90,14 +114,19 @@ function App() {
     setPopupMessage('문제가 추가됐어요.');
   }
 
-  function saveQuestions() {
+  function createQuizLink() {
     if (questions.length === 0) {
-      setPopupMessage('저장할 문제가 없어요. \n 문제를 먼저 추가해주세요.');
+      setPopupMessage('공유할 문제가 없어요.');
       return;
     }
 
-    setPopupMessage('문제지가 저장됐어요. \n 이제 퀴즈를 시작할 수 있어요.');
+    const encodedQuiz = encodeURIComponent(JSON.stringify(questions));
+    const quizUrl = `https://couple-quiz-mocha.vercel.app/?quiz=${encodedQuiz}`;
+
+    navigator.clipboard.writeText(quizUrl);
+    setPopupMessage('문제 링크가 복사됐어요.');
   }
+
 
   function handleNextQuestion() {
     if (selectedIndex === null) {
@@ -248,9 +277,9 @@ function App() {
             />
 
             <button
-              className="setting-image-btn save-btn"
-              onClick={saveQuestions}
-              aria-label="저장하기"
+              className="setting-image-btn quiz-link-btn"
+              onClick={createQuizLink}
+              aria-label="문제 링크"
             />
           </div>
 
